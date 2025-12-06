@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Management</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <header class="hover-lift">
+            <h1>Attendance Management</h1>
+            <div>
+                <a class="btn large-text" href="/admin/dashboard">Dashboard</a>
+                <a class="btn large-text" href="/admin/attendance">Mark Attendance</a>
+                <a class="btn large-text" href="/admin/attendance/report">View Reports</a>
+                <a class="btn danger large-text" href="/admin/logout">Logout</a>
+            </div>
+        </header>
+
+        <div class="card hover-lift">
+            <h2 class="card-title">Mark Attendance for <span id="currentDate"></span></h2>
+
+            <div style="margin-bottom: 30px;">
+                <label for="attendanceDate" class="large-text" style="display: block; margin-bottom: 10px;">Select Date:</label>
+                <input type="date" id="attendanceDate" name="date" class="large-text"
+                       value="<%= today %>" style="padding: 15px; width: 250px; font-size: 18px;">
+            </div>
+
+            <form id="attendanceForm" action="/admin/attendance" method="POST">
+                <input type="hidden" name="date" id="formDate" value="<%= today %>">
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="large-text">Roll Number</th>
+                                <th class="large-text">Name</th>
+                                <th class="large-text">Course</th>
+                                <th class="large-text">Attendance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% students.forEach(student => { %>
+                                <tr>
+                                    <td class="large-text">#<%= student.roll %></td>
+                                    <td class="large-text"><strong><%= student.name %></strong></td>
+                                    <td class="large-text"><%= student.course %></td>
+                                    <td class="large-text">
+                                        <div style="display: flex; gap: 10px; align-items: center;">
+                                            <label style="display: flex; align-items: center; gap: 5px;">
+                                                <input type="radio"
+                                                       name="attendance[<%= student._id %>]"
+                                                       value="present"
+                                                       <%= (attendanceMap[student._id.toString()] === 'present') ? 'checked' : (attendanceMap[student._id.toString()] !== 'absent' && 'checked') /* default to present if no record */ %>>
+                                                <span style="color: #10b981; font-weight: 600;">Present</span>
+                                            </label>
+                                            <label style="display: flex; align-items: center; gap: 5px;">
+                                                <input type="radio"
+                                                       name="attendance[<%= student._id %>]"
+                                                       value="absent"
+                                                       <%= (attendanceMap[student._id.toString()] === 'absent') ? 'checked' : '' %>>
+                                                <span style="color: #dc2626; font-weight: 600;">Absent</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-35 text-center">
+                    <button type="submit" class="btn large-text">Save Attendance</button>
+                    <a href="/admin/dashboard" class="btn warning large-text" style="margin-left: 15px;">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Update the date input and hidden form field when date changes
+        document.getElementById('attendanceDate').addEventListener('change', function() {
+            const selectedDate = this.value;
+            document.getElementById('formDate').value = selectedDate;
+
+            // Update the heading to show current selected date
+            document.getElementById('currentDate').textContent = selectedDate;
+        });
+
+        // Set the initial date in the heading
+        document.getElementById('currentDate').textContent = document.getElementById('attendanceDate').value;
+
+        // Add JavaScript to handle date changes and form submission
+        document.getElementById('attendanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Confirmation before saving
+            if (confirm('Are you sure you want to save attendance for the selected date?')) {
+                this.submit();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <header class="hover-lift">
+            <h1>Edit Student</h1>
+            <div>
+                <a class="btn large-text" href="/admin/dashboard">Back to Dashboard</a>
+                <a class="btn large-text" href="/">Home</a>
+            </div>
+        </header>
+
+        <div class="card hover-lift">
+            <h2 class="card-title">Edit Student Details</h2>
+            <form action="/admin/edit/<%= student._id %>" method="POST">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <input type="text" name="name" value="<%= student.name %>" placeholder="Enter Full Name" required class="large-text">
+                    <input type="number" name="roll" value="<%= student.roll %>" placeholder="Enter Roll Number" required class="large-text">
+                    <input type="text" name="course" value="<%= student.course %>" placeholder="Enter Course" required class="large-text">
+                    <input type="number" name="marks" value="<%= student.marks %>" placeholder="Enter Marks (0-100)" min="0" max="100" required class="large-text">
+                </div>
+                <button type="submit" class="btn large-text mt-25">Update Student</button>
+            </form>
+        </div>
+
+        <div class="card hover-lift">
+            <h3 class="card-title">Current Details</h3>
+            <div class="student-details">
+                <div class="detail-item">
+                    <span class="detail-label large-text">Name:</span>
+                    <span class="detail-value large-text"><%= student.name %></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label large-text">Roll Number:</span>
+                    <span class="detail-value large-text">#<%= student.roll %></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label large-text">Course:</span>
+                    <span class="detail-value large-text"><%= student.course %></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label large-text">Marks:</span>
+                    <span class="detail-value large-text"><%= student.marks %>%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <header class="hover-lift text-center">
+            <h1>Student Management System</h1>
+        </header>
+
+        <div class="card text-center hover-lift">
+            <h2 class="card-title">Welcome to Student Management System</h2>
+            <p class="large-text" style="margin-bottom: 30px; color: #6c757d;">
+                Please select your user type to continue
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 20px;">
+                <!-- Admin Section -->
+                <div class="card" style="background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%); color: white; text-align: center;">
+                    <h3 class="card-title" style="color: white; font-size: 1.8rem;">Admin Access</h3>
+                    <p class="large-text" style="margin: 20px 0; color: rgba(255,255,255,0.9);">
+                        Login as administrator to manage student records, add, edit, and delete student information.
+                    </p>
+                    <a href="/admin/login" class="btn large-text"
+                       style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; min-width: 200px;">
+                        Admin Login
+                    </a>
+                </div>
+
+                <!-- Student Section -->
+                <div class="card" style="background: linear-gradient(135deg, #4cc9f0 0%, #4895ef 100%); color: white; text-align: center;">
+                    <h3 class="card-title" style="color: white; font-size: 1.8rem;">Student View</h3>
+                    <p class="large-text" style="margin: 20px 0; color: rgba(255,255,255,0.9);">
+                        Access your personal information using your roll number to view your details.
+                    </p>
+                    
+                    <a href="/student/login" class="btn large-text margin"
+                       style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; min-width: 200px;">
+                        Student Login
+                    </a>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <header class="hover-lift">
+            <h1>Admin Login</h1>
+            <a class="btn large-text" href="/">Home</a>
+        </header>
+
+        <div class="login-container hover-lift">
+            <div class="login-form">
+                <h1>Admin Login</h1>
+
+                <% if (error) { %>
+                    <div class="error large-text"><%= error %></div>
+                <% } %>
+
+                <form method="POST" class="mt-30">
+                    <input type="text" name="username" placeholder="Enter Username" required class="large-text">
+                    <input type="password" name="password" placeholder="Enter Password" required class="large-text">
+                    <button type="submit" class="btn large-text">Login</button>
+                </form>
+
+                <div class="mt-30 text-center">
+                    <p class="large-text" style="color: #6c757d; margin-top: 20px;">
+                        <strong>Username:</strong> admin &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Password:</strong> admin
+                    </p>
+                    <p class="large-text" style="color: #6c757d; margin-top: 15px;">
+                        Please use these credentials to access the system
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

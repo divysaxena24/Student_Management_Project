@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Reports</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <header class="hover-lift">
+            <h1>Attendance Reports</h1>
+            <div>
+                <a class="btn large-text" href="/admin/dashboard">Dashboard</a>
+                <a class="btn large-text" href="/admin/attendance">Mark Attendance</a>
+                <a class="btn danger large-text" href="/admin/logout">Logout</a>
+            </div>
+        </header>
+
+        <div class="card hover-lift">
+            <h2 class="card-title">Attendance Reports</h2>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="large-text">Roll Number</th>
+                            <th class="large-text">Name</th>
+                            <th class="large-text">Course</th>
+                            <th class="large-text">Total Days</th>
+                            <th class="large-text">Present Days</th>
+                            <th class="large-text">Absent Days</th>
+                            <th class="large-text">Attendance %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% studentAttendance.forEach(item => { 
+                            const totalDays = item.attendance.length;
+                            const presentDays = item.attendance.filter(record => record.status === 'present').length;
+                            const absentDays = item.attendance.filter(record => record.status === 'absent').length;
+                            const attendancePercentage = totalDays > 0 ? ((presentDays / totalDays) * 100).toFixed(2) : 0;
+                        %>
+                            <tr>
+                                <td class="large-text">#<%= item.student.roll %></td>
+                                <td class="large-text"><strong><%= item.student.name %></strong></td>
+                                <td class="large-text"><%= item.student.course %></td>
+                                <td class="large-text"><%= totalDays %></td>
+                                <td class="large-text"><span style="color: #10b981; font-weight: 600;"><%= presentDays %></span></td>
+                                <td class="large-text"><span style="color: #dc2626; font-weight: 600;"><%= absentDays %></span></td>
+                                <td class="large-text">
+                                    <span class="marks-badge 
+                                        <% if (attendancePercentage >= 75) { %>marks-high<%
+                                        } else if (attendancePercentage >= 60) { %>marks-medium<%
+                                        } else { %>marks-low<% } %>">
+                                        <%= attendancePercentage %>%
+                                    </span>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-35 text-center">
+                <a href="/admin/attendance" class="btn large-text">Mark Attendance</a>
+                <a href="/admin/dashboard" class="btn warning large-text" style="margin-left: 15px;">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

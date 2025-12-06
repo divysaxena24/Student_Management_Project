@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <header class="hover-lift">
+            <h1>Student Details</h1>
+            <div>
+                <a class="btn large-text" href="/">Home</a>
+                <a class="btn large-text" href="/student/login">Student Login</a>
+            </div>
+        </header>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="error large-text"><%= error %></div>
+        <% } else if (student) { %>
+            <!-- Student Information Card -->
+            <div class="student-card hover-lift">
+                <h2 class="text-center"><%= student.name %></h2>
+                <p>Student Information Portal</p>
+                <p>Academic Year 2024-2028</p>
+            </div>
+
+            <div class="student-details hover-lift">
+                <h2 class="text-center very-large-text" style="margin-bottom: 40px; color: var(--college-navy); border-bottom: 3px solid var(--college-gold); padding-bottom: 20px;">
+                    Personal & Academic Details
+                </h2>
+
+                <!-- Vertical layout for student details -->
+                <div class="detail-item">
+                    <span class="detail-label">Full Name</span>
+                    <%= student.name %></span>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Roll Number</span>
+                    #<%= student.roll %></span>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Course</span>
+                    <%= student.course %></span>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Academic Marks</span>
+                    
+                        <span class="marks-badge
+                            <% if (student.marks >= 80) { %>marks-high<%
+                            } else if (student.marks >= 60) { %>marks-medium<%
+                            } else { %>marks-low<% } %>">
+                            <%= student.marks %>%
+                        </span>
+                    </span>
+                </div>
+
+                <div class="mt-45 text-center">
+                    <a href="/" class="btn large-text">Return to Home</a>
+                    <a href="/student/login" class="btn large-text mt-25" style="margin-left: 20px;">View Another</a>
+                </div>
+            </div>
+        <% } else { %>
+            <div class="card text-center hover-lift">
+                <h2 class="card-title">Student Not Found</h2>
+                <p class="large-text">No student found with the provided information.</p>
+                <div class="mt-35">
+                    <a href="/student/login" class="btn large-text">Try Again</a>
+                    <a href="/" class="btn large-text mt-25">Return Home</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>
